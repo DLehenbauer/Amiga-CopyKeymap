@@ -119,11 +119,11 @@ struct KeyMap* copyKeymap(struct KeyMap* pSrc) {
     // Copy the map entries and string/dead tables for the low map.
     visitLo(pSrc, &copy, CopyVisitor);
     
-    // Sanity check that CopyVisitor advanced pKmEntry to the end of the hi map.
+    // Sanity check that CopyVisitor advanced pKmEntry to the end of the low map.
     assert((copy.pKmEntry - pDestKeyMap->km_LoKeyMap) == LO_MAP_LENGTH);
 
-    // Copy the map entries and string/dead tables for the low map.
-    copy.pKmEntry = pDestTables->hiKeyMap;                  // Update 'pKmEntry' to start of destination hi map.
+    // Copy the map entries and string/dead tables for the high map.
+    copy.pKmEntry = pDestTables->hiKeyMap;                  // Update 'pKmEntry' to start of high map.
     visitHi(pSrc, &copy, CopyVisitor);
 
     // Sanity check that CopyVisitor advanced pKmEntry to the end of the high map.

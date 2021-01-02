@@ -42,6 +42,8 @@ void copyString(void* pContext, UBYTE rawKey, int numEntries, const UBYTE* pSrcT
     //        | numEntries * 2B |           (Σ lens B)         |
     //        +-----------------+------------------------------+
     //
+    // pSrcTable is advanced as we copy the string length and offsets.  pSrcStart is
+    // a const pointer used when calculating offsets into the char data.
     pClone->pBuffer += (numEntries << 1);
 
     for (int n = 0; n < numEntries; n++) {
@@ -78,6 +80,9 @@ void copyDead(void* pContext, UBYTE rawKey, int numEntries, const UBYTE* pSrcTab
     //        | numEntries * 2B |                              |
     //        +-----------------+------------------------------+
     //
+    //
+    // pSrcTable is advanced as we copy the dead kind/value entries.  pSrcStart is
+    // a const pointer used when calculating offsets into the data tables.
     pClone->pBuffer += (numEntries << 1);
 
     for (int n = 0; n < numEntries; n++) {
